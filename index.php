@@ -18,11 +18,15 @@ $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 
 if(isset($GET["action"])){
     switch ($_GET["action"]){
-        case "listFilms" : $ctrlCinema->listFilms(); break;
-        // case "listActeurs" : $ctrlCinema->listActeurs(); break;
+        case "listFilms" : $contenu = $ctrlCinema->listFilms(); break;
+        case "listActeurs" : $contenu = $ctrlCinema->listActeurs(); break;
 
     };
 };
+
+// Dans votre index.php ou autre fichier d'affichage
+
+
 
 
 ?>

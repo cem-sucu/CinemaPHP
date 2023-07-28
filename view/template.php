@@ -13,13 +13,15 @@
     <nav>
         <ul>
             <li><a href="index.php?action=listFilms">Liste des films</a></li>
-            <!-- Ajoutez d'autres liens de navigation ici -->
+           <li><a href="index.php?action=listActeurs">Liste des acteurs</a></li>
         </ul>
     </nav>
 </header>
 
 <div class="container">
     <?= $contenu ?> <!-- C'est ici que le contenu spécifique à chaque vue sera inséré -->
+
+
 </div>
 
 
