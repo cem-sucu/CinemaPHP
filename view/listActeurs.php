@@ -6,6 +6,7 @@
     <title><?= $titre ?></title>
 </head>
 <body>
+    
 <p>Il y a <?= count($acteurs) ?> acteurs</p>
 
 <h2><?= $titre_secondaire ?></h2>
