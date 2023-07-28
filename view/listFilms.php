@@ -43,8 +43,8 @@
 
 $titre = "Liste des films";
 $titre_secondaire = "Liste des films";
-$contenu = ob_get_clean(); // Récupérer le contenu mis en tampon
 
+$contenu = ob_get_clean(); // Récupérer le contenu mis en tampon
 require "./view/template.php";
 ?>
     

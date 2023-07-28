@@ -1,4 +1,3 @@
-<!-- view/listActeurs.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,9 +34,9 @@
 
 
 $titre = "Liste des acteurs";
-$titre_secondaire = "Liste des acteur";
-$contenu = ob_get_clean(); // Récupérer le contenu mis en tampon
+$titre_secondaire = "Liste des acteurs";
 
+$contenu = ob_get_clean(); // Récupérer le contenu mis en tampon
 require "./view/template.php";
 ?>
 </html>
