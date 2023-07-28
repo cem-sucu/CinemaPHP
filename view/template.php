@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/css/template.css">
     <title><?= $titre ?></title>
 </head>
 <body>
@@ -11,7 +12,7 @@
 <header>
     <h1>Mon Cinéma</h1>
     <nav>
-        <ul>
+        <ul class="ulTemplate">
             <li><a href="index.php?action=listFilms">Liste des films</a></li>
            <li><a href="index.php?action=listActeurs">Liste des acteurs</a></li>
            <li><a href="index.php?action=listRealisateurs">Liste des réalisateurs</a></li>

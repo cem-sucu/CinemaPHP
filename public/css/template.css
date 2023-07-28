@@ -1,0 +1,17 @@
+h1{
+    text-align: center;
+    color: brown;
+}
+
+.ulTemplate{
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    justify-content: center;
+    margin: 20px 0;
+    padding:0;
+}
+
+.ulTemplate li{
+    margin: 0 10px;
+}

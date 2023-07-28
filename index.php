@@ -1,6 +1,6 @@
 <?php
 
-echo "TEST"; // pour voir si tout marche si page blanche apparait
+// echo "TEST"; // pour voir si tout marche si page blanche apparait
 
 // permet d'affichee tout les erreur 
 ini_set('display_errors', 1);
