@@ -33,6 +33,8 @@ if(isset($_GET["action"])){
         // Si "action" est "listRealisateurs" : appelle la méthode listRealisateurs() de CinemaController et stocke son résultat dans $contenu
         case "listRealisateurs" : $contenu = $ctrlCinema->listRealisateurs(); 
         break;
+        case "listGenres" : $contenu = $ctrlCinema->listGenres();
+        break;
         default: $contenu = $ctrlCinema->listFilms(); // Définir une action par défaut au cas où l'action n'est pas spécifiée ou invalide
     }
 }

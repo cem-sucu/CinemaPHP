@@ -15,6 +15,7 @@
             <li><a href="index.php?action=listFilms">Liste des films</a></li>
            <li><a href="index.php?action=listActeurs">Liste des acteurs</a></li>
            <li><a href="index.php?action=listRealisateurs">Liste des réalisateurs</a></li>
+           <li><a href="index.php?action=listGenres">Liste des genres</a></li>
         </ul>
     </nav>
 </header>

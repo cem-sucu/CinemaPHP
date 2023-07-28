@@ -42,6 +42,7 @@ class CinemaController {
 
         // Inclure la vue listActeurs.php et passer les données nécessaires
         require "view/listActeurs.php";
+
     }
 
     public function listRealisateurs(){
@@ -56,6 +57,27 @@ class CinemaController {
         $titre_secondaire = "Liste des réalisateur";
 
         require "view/listRealisateurs.php";
+
+       
+    }
+
+    public function listGenres(){
+        ob_start();
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->query("SELECT DISTINCT genre 
+                                FROM genre
+                            ");
+
+        $genres = $requete->fetchAll();
+        $titre = "Liste des genres";
+        $titre_secondaire = "Liste des genres";
+
+        // Inclure la vue listGenres.php et passer les données nécessaires
+        require "view/listGenres.php";
+
+        // Pas besoin d'utiliser ob_get_clean() ici, car nous ne faisons pas d'inclusion de vue directement dans cette méthode
+        // Nous retournerons simplement les valeurs $genres, $titre et $titre_secondaire dans un tableau associatif
+        
     }
 
 }
