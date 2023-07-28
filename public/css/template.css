@@ -1,6 +1,21 @@
+*{
+margin: 0px;
+padding: 0px;
+box-sizing:border-box ;
+}
+
+html{
+    text-align: -webkit-center;
+}
+
+body{
+    background-color: #026045;
+    max-width: 100vh;
+}
+
 h1{
     text-align: center;
-    color: brown;
+    color: #fff;
 }
 
 .ulTemplate{

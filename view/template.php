@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- Ajoutez ici l'en-tête commun à toutes les pages -->
+
 <header>
     <h1>Mon Cinéma</h1>
     <nav>

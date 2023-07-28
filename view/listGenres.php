@@ -7,9 +7,10 @@
 </head>
 <body>
  
-<p>Il y a <?= count($genres) ?> films</p>
-
-<h2><?= $titre_secondaire ?></h2>
+<div class="infos">
+    <p>Il y a <?= count($genres) ?> films</p>
+    <h2><?= $titre_secondaire ?></h2>
+</div>
 
 <ul>
     <?php foreach($genres as $genre) { ?>

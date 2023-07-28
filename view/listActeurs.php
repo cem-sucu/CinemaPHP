@@ -6,10 +6,11 @@
     <title><?= $titre ?></title>
 </head>
 <body>
-    
-<p>Il y a <?= count($acteurs) ?> acteurs</p>
 
-<h2><?= $titre_secondaire ?></h2>
+<div class="infos">
+    <h2><?= $titre_secondaire ?></h2>
+    <p>Il y a <?= count($acteurs) ?> acteurs</p>
+</div>
     <table>
         <thead>
             <tr>

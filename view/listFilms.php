@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../public/css/listFilms.css"> -->
+    <link rel="stylesheet" href="./public/css/listFilms.css">
     <title><?= $titre ?></title>
 </head>
 <body>
 
 
 
-
-<p>Il y a <?= count($films) ?> films</p>
-
-<h2><?= $titre_secondaire ?></h2>
+<div class="infos">
+    <h2><?= $titre_secondaire ?></h2>
+    <p>Il y a <?= count($films) ?> films</p>
+</div>
 
 <table>
     <thead>

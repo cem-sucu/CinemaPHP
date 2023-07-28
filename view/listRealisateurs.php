@@ -7,8 +7,10 @@
 </head>
 <body>
    
-<p>Il y a <?= count($realisateurs) ?> films</p>
-<h2><?= $titre_secondaire ?></h2>
+<div class="infos">
+    <h2><?= $titre_secondaire ?></h2>
+    <p>Il y a <?= count($realisateurs) ?> films</p>
+</div>
 
 <table>
     <thead>
