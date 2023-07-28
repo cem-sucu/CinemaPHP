@@ -18,8 +18,12 @@ $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 
 if(isset($_GET["action"])){
     switch ($_GET["action"]){
-        case "listFilms" : $contenu = $ctrlCinema->listFilms(); break;
-        case "listActeurs" : $contenu = $ctrlCinema->listActeurs(); break;
+        case "listFilms" : $contenu = $ctrlCinema->listFilms(); 
+        break;
+        case "listActeurs" : $contenu = $ctrlCinema->listActeurs(); 
+        break;
+        case "listRealisateurs" : $contenu = $ctrlCinema->listRealisateurs(); 
+        break;
         default: $contenu = $ctrlCinema->listFilms(); // Définir une action par défaut au cas où l'action n'est pas spécifiée ou invalide
     }
 }

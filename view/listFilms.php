@@ -10,7 +10,7 @@
 
 
 
-<!-- view/listFilms.php -->
+
 <p>Il y a <?= count($films) ?> films</p>
 
 <h2><?= $titre_secondaire ?></h2>
@@ -40,7 +40,7 @@
 </table>
 <?php
 
-
+$film = $requete->fetchAll();
 $titre = "Liste des films";
 $titre_secondaire = "Liste des films";
 

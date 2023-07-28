@@ -14,6 +14,7 @@
         <ul>
             <li><a href="index.php?action=listFilms">Liste des films</a></li>
            <li><a href="index.php?action=listActeurs">Liste des acteurs</a></li>
+           <li><a href="index.php?action=listRealisateurs">Liste des réalisateurs</a></li>
         </ul>
     </nav>
 </header>
