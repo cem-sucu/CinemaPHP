@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-//importe la class 
+//importe la class controller
 use Controller\CinemaController;
 
 // l'autoloader pour inclure autoimatiquement les fichier
