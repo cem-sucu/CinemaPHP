@@ -9,14 +9,16 @@ error_reporting(E_ALL);
 
 //importe la class controller
 use Controller\CinemaController;
+use Controller\ActionController;
 
 // l'autoloader pour inclure autoimatiquement les fichier
 spl_autoload_register(function ($class_name){
-    include $class_name . '.php';
+    include  $class_name . '.php';
 });
 
 // je creer une insatnce de la classe CinemaContrtoller
 $ctrlCinema = new CinemaController();
+$ctrlAction = new ActionController();
 
 // Récupère la valeur du paramètre "id" dans l'URL s'il existe, sinon le définir à null
 $id = (isset($_GET["id"])) ? $_GET["id"] : null;
@@ -34,6 +36,8 @@ if(isset($_GET["action"])){
         case "listRealisateurs" : $contenu = $ctrlCinema->listRealisateurs(); 
         break;
         case "listGenres" : $contenu = $ctrlCinema->listGenres();
+        break;
+        case "ajouterFilm" : $contenu = $ctrlAction->ajouterFilm();
         break;
         default: $contenu = $ctrlCinema->listFilms(); // Définir une action par défaut au cas où l'action n'est pas spécifiée ou invalide
     }
