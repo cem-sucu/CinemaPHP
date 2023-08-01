@@ -8,7 +8,7 @@ class CinemaController {
         ob_start(); // Début de la mise en tampon du contenu
         
         $pdo = Connect::seConnecter();
-        $requete = $pdo->query(" SELECT f.titre, f.anneSortie, f.durée, f.affiche, p.nom AS réalisateur
+        $requete = $pdo->query(" SELECT f.id_film, f.titre, f.anneSortie, f.durée, f.affiche, p.nom AS réalisateur
                                 FROM film f
                                 INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
                                 INNER JOIN personne p ON r.id_personne = p.id_personne
@@ -45,6 +45,7 @@ class CinemaController {
 
     }
 
+    // list des réalisqateurs
     public function listRealisateurs(){
         ob_start();
         $pdo = Connect::SeConnecter();
@@ -61,6 +62,7 @@ class CinemaController {
        
     }
 
+    /* liste des genrres */
     public function listGenres(){
         ob_start();
         $pdo = Connect::seConnecter();

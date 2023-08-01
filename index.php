@@ -46,6 +46,14 @@ if(isset($_GET["action"])){
                 require "view/ajouterFilm.php";
                 $contenu = ob_get_clean();
             }
+        break;
+        case "supprimerFilm":
+            //si film le id existe alors... on peux supprimer
+            if (isset($_GET["idFilm"])) {
+                $idFilmASupprimer = $_GET["idFilm"];
+                // Appeler une méthode du contrôleur pour supprimer le film en utilisant l'ID du film
+                $ctrlAction->supprimerFilm($idFilmASupprimer);
+            }
             break;
         default: $contenu = $ctrlCinema->listFilms(); // Définir une action par défaut au cas où l'action n'est pas spécifiée ou invalide
     }

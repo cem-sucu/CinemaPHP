@@ -40,6 +40,11 @@
                 <td><?= $film["durée"]." min"?></td>
                 <td><?= $film["réalisateur"]?></td>
                 <td><img src="./public/img/<?= $film["affiche"] ?>" alt="<?= $film["titre"] ?>" width="100"></td>
+                <td>
+                        <a href="index.php?action=supprimerFilm&idFilm=<?= $film['id_film'] ?>">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                    </td>
             </tr>
         <?php } ?>
     </tbody>

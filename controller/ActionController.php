@@ -45,6 +45,31 @@ class ActionController {
             }
         }
     }
+
+    public function supprimerFilm($idFilm)
+    {
+        $bdd = Connect::seConnecter(); // Obtenir une instance de PDO
+
+        // Vérifier si la connexion à la base de données a réussi
+        if (!$bdd) {
+            echo "Erreur de connexion à la base de données.";
+            exit;
+        }
+
+        // Requête DELETE FROM
+        $requete = $bdd->prepare('DELETE FROM film WHERE id_film = :idFilm');
+        $requete->bindParam(':idFilm', $idFilm);
+
+        if ($requete->execute()) {
+            ob_start();
+            echo "Le film a été supprimé avec succès!";
+            ob_end_flush();
+            header("Refresh: 3; url=index.php?action=listFilms"); // Rediriger après 3 secondes vers la liste des films
+            exit; // Quitter le script
+        } else {
+            echo "Erreur lors de la suppression du film.";
+        }
+    }
 }
 
 
