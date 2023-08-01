@@ -37,8 +37,16 @@ if(isset($_GET["action"])){
         break;
         case "listGenres" : $contenu = $ctrlCinema->listGenres();
         break;
-        case "ajouterFilm" : $contenu = $ctrlAction->ajouterFilm();
-        break;
+        case "ajouterFilm":
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $contenu = $ctrlAction->ajouterFilm();
+            } else {
+                // Afficher le formulaire pour ajouter un film (qui est déja dans le fichier "ajouterFilm.php")
+                ob_start();
+                require "view/ajouterFilm.php";
+                $contenu = ob_get_clean();
+            }
+            break;
         default: $contenu = $ctrlCinema->listFilms(); // Définir une action par défaut au cas où l'action n'est pas spécifiée ou invalide
     }
 }
