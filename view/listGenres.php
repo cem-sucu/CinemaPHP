@@ -9,7 +9,7 @@
 <body>
  
 <div class="infos">
-    <p>Il y a <?= count($genres) ?> films</p>
+    <p>Il y a <?= count($genres) ?> genres de film</p>
     <h2><?= $titre_secondaire ?></h2>
 </div>
 

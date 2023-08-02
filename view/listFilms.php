@@ -37,9 +37,9 @@
             <tr>
                 <td><?= $film["titre"] ?></td>
                 <td><?= $film["anneSortie"] ?></td>
-                <td><?= $film["durée"]." min"?></td>
+                <td><?= $film["duree"]." min"?></td>
                 <td><?= $film["réalisateur"]?></td>
-                <td><img src="./public/img/<?= $film["affiche"] ?>" alt="<?= $film["titre"] ?>" width="100"></td>
+                <td><a href="index.php?action=detailsFilms&id"><img src="./public/img/<?= $film["affiche"] ?>" alt="<?= $film["titre"] ?>" width="100"></a></td>
                 <td>
                         <a href="index.php?action=supprimerFilm&id=<?= $film['id_film'] ?>">
                             <i class="fa-solid fa-trash-can"></i>

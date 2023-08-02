@@ -25,7 +25,7 @@ class ActionController {
             }
 
             // Requête INSERT INTO
-            $requete = $bdd->prepare('INSERT INTO film (titre, anneSortie, durée, resume, affiche, note, id_realisateur) VALUES (:titre, :anneeSortie, :duree, :resume, :affiche, :note, :realisateurId)');
+            $requete = $bdd->prepare('INSERT INTO film (titre, anneSortie, duree, resume, affiche, note, id_realisateur) VALUES (:titre, :anneeSortie, :duree, :resume, :affiche, :note, :realisateurId)');
             $requete->bindParam(':titre', $titre);
             $requete->bindParam(':anneeSortie', $anneeSortie);
             $requete->bindParam(':duree', $duree);
