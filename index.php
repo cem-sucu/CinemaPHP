@@ -27,39 +27,25 @@ $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 if(isset($_GET["action"])){
     switch ($_GET["action"]){
         // Si "action" est "listFilms": appelle la méthode listFilms() de CinemaController et stocke son résultat dans $contenu
-        case "listFilms" : $contenu = $ctrlCinema->listFilms(); 
+        case "listFilms" : $ctrlCinema->listFilms(); 
         break;
         // Si "action" est "listActeurs", : appelle la méthode listActeurs() de CinemaController et stocke son résultat dans $contenu
-        case "listActeurs" : $contenu = $ctrlCinema->listActeurs(); 
+        case "listActeurs" : $ctrlCinema->listActeurs(); 
         break;
         // Si "action" est "listRealisateurs" : appelle la méthode listRealisateurs() de CinemaController et stocke son résultat dans $contenu
-        case "listRealisateurs" : $contenu = $ctrlCinema->listRealisateurs(); 
+        case "listRealisateurs" : $ctrlCinema->listRealisateurs(); 
         break;
-        case "listGenres" : $contenu = $ctrlCinema->listGenres();
+        case "listGenres" : $ctrlCinema->listGenres();
         break;
-        case "ajouterFilm":
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $contenu = $ctrlAction->ajouterFilm();
-            } else {
-                // Afficher le formulaire pour ajouter un film (qui est déja dans le fichier "ajouterFilm.php")
-                ob_start();
-                require "view/ajouterFilm.php";
-                $contenu = ob_get_clean();
-            }
+        case "ajouterFilm": $ctrlAction->ajouterFilm();
         break;
-        case "supprimerFilm":
-            //si film le id existe alors... on peux supprimer
-            if (isset($_GET["idFilm"])) {
-                $idFilmASupprimer = $_GET["idFilm"];
-                // Appeler une méthode du contrôleur pour supprimer le film en utilisant l'ID du film
-                $ctrlAction->supprimerFilm($idFilmASupprimer);
-            }
-            break;
-        default: $contenu = $ctrlCinema->listFilms(); // Définir une action par défaut au cas où l'action n'est pas spécifiée ou invalide
+        case "supprimerFilm":$ctrlAction->supprimerFilm($id);
+        break;
+        default: $ctrlCinema->listFilms(); // Définir une action par défaut au cas où l'action n'est pas spécifiée ou invalide
     }
 }
 
 // afficher le contenu
-echo $contenu;
+// echo $contenu;
 
 

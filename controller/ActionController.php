@@ -43,11 +43,17 @@ class ActionController {
             } else {
                 echo "Erreur lors de l'ajout du film.";
             }
+        } else {
+            ob_start();
+            require "view/ajouterFilm.php";
+            // $contenu = ob_get_clean();
+
         }
     }
 
-    public function supprimerFilm($idFilm)
-    {
+    public function supprimerFilm($id)
+    {   
+        $_GET["id"];
         $bdd = Connect::seConnecter(); // Obtenir une instance de PDO
 
         // Vérifier si la connexion à la base de données a réussi
@@ -57,8 +63,8 @@ class ActionController {
         }
 
         // Requête DELETE FROM
-        $requete = $bdd->prepare('DELETE FROM film WHERE id_film = :idFilm');
-        $requete->bindParam(':idFilm', $idFilm);
+        $requete = $bdd->prepare('DELETE FROM film WHERE id_film = :id');
+        $requete->bindParam(':id', $id);
 
         if ($requete->execute()) {
             ob_start();
