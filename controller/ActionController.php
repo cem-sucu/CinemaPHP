@@ -35,10 +35,11 @@ class ActionController {
             $requete->bindParam(':realisateurId', $realisateurId);
 
             if ($requete->execute()) {
+                $lastInsertedId = $bdd->lastInsertId();
                 ob_start();
                 echo "Le film a été ajouté avec succès!";
                 ob_end_flush();
-                header("Refresh: 3; url=index.php?action=listFilms"); //une fois le message succés affiché nous redirige dans 3 secondes a listFilm
+                header("Refresh: 1; url=index.php?action=detailsFilms&id=".$lastInsertedId); //une fois le message succés affiché nous redirige dans 1 secondes a listFilm
                 exit; // on quitte le script
             } else {
                 echo "Erreur lors de l'ajout du film.";
@@ -70,7 +71,7 @@ class ActionController {
             ob_start();
             echo "Le film a été supprimé avec succès!";
             ob_end_flush();
-            header("Refresh: 3; url=index.php?action=listFilms"); // Rediriger après 3 secondes vers la liste des films
+            header("Refresh: 1; url=index.php?action=listFilms"); // Rediriger après 1 secondes vers la liste des films
             exit; // Quitter le script
         } else {
             echo "Erreur lors de la suppression du film.";
