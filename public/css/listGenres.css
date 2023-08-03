@@ -9,4 +9,15 @@ p{
     text-align: center;
 }
 
+ul, li{
+    padding: 8px;
+    color: #fff;
+    text-decoration: none;
+    list-style: none;
+}
+
+ul, li:hover{
+    color: #fda34b;
+    cursor: pointer;
+}
 
