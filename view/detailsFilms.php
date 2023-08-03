@@ -23,7 +23,7 @@
     <tbody>
         <?php foreach($details as $detail) { ?>
             <tr>
-                <td><?= $detail['affiche'] ?></td>
+                <td><img src="./public/img/<?= $detail["affiche"] ?>" alt="<?= $film["titre"] ?>" width="100"></td>
                 <td><?= $detail['date'] ?></td>
                 <td><?= $detail['realisateur']?></td>
                 <td><?= $detail['resume']?></td>
