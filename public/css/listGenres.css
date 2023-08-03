@@ -9,29 +9,4 @@ p{
     text-align: center;
 }
 
-li a {
-    text-decoration: none;
-    border-top: 1px solid #c8699e;
-    border-bottom: 1px solid #fda34b;
-    border-radius: 6px;
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #fff;
-}
-
-li a:hover{
-    background-color:#c8699e ;
-}
-
-ul, li{
-    padding: 8px;
-    color: #fff;
-    text-decoration: none;
-    list-style: none;
-}
-
-ul, li:hover{
-    color: #fda34b;
-    cursor: pointer;
-}
 

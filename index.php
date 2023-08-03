@@ -29,7 +29,7 @@ if(isset($_GET["action"])){
         // Si "action" est "listFilms": appelle la méthode listFilms() de CinemaController et stocke son résultat dans $contenu
         case "listFilms" : $ctrlCinema->listFilms(); 
         break;
-        case "detailsFilms" : $ctrlCinema->detailsFilms();
+        case "detailsFilms" : $ctrlCinema->detailsFilms($id);
         break;
         // Si "action" est "listActeurs", : appelle la méthode listActeurs() de CinemaController et stocke son résultat dans $contenu
         case "listActeurs" : $ctrlCinema->listActeurs(); 

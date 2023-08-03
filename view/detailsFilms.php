@@ -3,39 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/css/template.css">
     <title><?= $titre ?></title>
 </head>
 <body>
 <h2><?= $titre_secondaire ?></h2>
 
-<p>il y a <?= count($details)?></p>
-<table>
-    <thead>
-        <tr>
-            <th>Affiche</th>
-            <th>Sortie</th>
-            <th>Realisateur</th>
-            <th>Resume</th>
-            <th>Note</th>
-            <th>Duree</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach($details as $detail) { ?>
-            <tr>
-                <td><img src="./public/img/<?= $detail["affiche"] ?>" alt="<?= $film["titre"] ?>" width="100"></td>
-                <td><?= $detail['date'] ?></td>
-                <td><?= $detail['realisateur']?></td>
-                <td><?= $detail['resume']?></td>
-                <td><?= $detail['note']?></td>
-                <td><?= $detail['duree']?></td>
-                
-            </tr>
+<h3><?= $details["titre"] ?></h3>
 
-
-        <?php } ?>
-    </tbody>
-</table>
+<div class="content">
+    <p>Année de sortie : <?= $details["anneSortie"] ?></p>
+    <p>Durée : <?= $details["duree"] ?> min</p>
+    <p>Réalisateur : <?= $details["realisateur"] ?></p>
+    <img src="./public/img/<?= $details["affiche"] ?>" alt="<?= $details["titre"] ?>" width="100">
+</div>
 
 </body>
 
@@ -45,12 +26,3 @@ $contenu = ob_get_clean(); // Récupérer le contenu mis en tampon
 require "./view/template.php";
 ?>
 </html>
-
-<?php 
-        // f.anneSortie AS date
-        // f.affiche AS affiche,
-        // CONCAT(p.prenom, ' ', p.nom) AS realisateur,
-        // f.resume AS resume,
-        // f.durée AS duree,
-        // f.note AS note
-?>
