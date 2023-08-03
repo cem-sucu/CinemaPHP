@@ -57,10 +57,11 @@ class CinemaController {
     public function listActeurs(){
         ob_start();
         $pdo = Connect::seConnecter();
-        $requete = $pdo->query(" SELECT a.id_acteur, p.nom, p.prenom, p.dateNaissance, p.sexe
-                                FROM acteur a
-                                JOIN personne p ON a.id_personne = p.id_personne
-                             ");
+        $requete = $pdo->query(" SELECT 
+        a.id_acteur, p.nom, p.prenom, p.dateNaissance, p.sexe
+        FROM acteur a
+        JOIN personne p ON a.id_personne = p.id_personne
+        ");
         $acteurs = $requete->fetchAll();
         $titre = "Liste des acteurs";
         $titre_secondaire = "Liste des acteurs";
@@ -73,10 +74,11 @@ class CinemaController {
     public function listRealisateurs(){
         ob_start();
         $pdo = Connect::SeConnecter();
-        $requete = $pdo->query("SELECT r.id_realisateur, p.nom, p.prenom, p.dateNaissance, p.sexe
-                                FROM realisateur r
-                                INNER JOIN  personne p ON r.id_personne = p.id_personne
-                             ");
+        $requete = $pdo->query("SELECT
+        r.id_realisateur, p.nom, p.prenom, p.dateNaissance, p.sexe
+        FROM realisateur r
+        INNER JOIN  personne p ON r.id_personne = p.id_personne
+        ");
         $realisateurs = $requete->fetchAll();
         $titre = "Liste des réalisateur";
         $titre_secondaire = "Liste des réalisateur";
@@ -103,6 +105,29 @@ class CinemaController {
         // Pas besoin d'utiliser ob_get_clean() ici, car nous ne faisons pas d'inclusion de vue directement dans cette méthode
         // Nous retournerons simplement les valeurs $genres, $titre et $titre_secondaire dans un tableau associatif
         
+    }
+
+    public function genreFilms($id){
+    ob_start();
+
+    $_GET['id'];
+    $pdo = Connect::seConnecter();
+    $requete = $pdo->prepare("SELECT f.titre, f.anneSortie, f.duree, f.affiche, p.nom AS realisateur
+    FROM film f
+    INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
+    INNER JOIN personne p ON r.id_personne = p.id_personne
+    INNER JOIN posseder po ON f.id_film = po.id_film
+    INNER JOIN genre g ON po.id_genre = g.id_genre
+    WHERE g.id_genre = :id;
+    ");
+
+    $requete->bindParam(':id', $id);
+    $requete->execute();
+    $genreFilms = $requete->fetch();
+
+    $titre = "Les films :";
+    require "view/genreFilms.php";
+    
     }
 
 

@@ -15,7 +15,7 @@
 
 <ul>
     <?php foreach($genres as $genre) { ?>
-        <li><?= $genre["genre"] ?></li>
+        <li><?= $genre["genre"] ?></a></li>
     <?php } ?>
 </ul>
 

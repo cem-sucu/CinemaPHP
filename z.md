@@ -3,3 +3,5 @@ pour les image que l'on ajoute dans dans vscode, il faut pas oublier de changer 
 ```UPDATE film SET affiche = 'pirate.jpg' WHERE titre = 'Pirates Des Caraïbes';```
 
 http://localhost/CinemaPHP/index.php?action=listFilms
+
+PDO::FETCH_ASSOC: retourne un tableau indexé par le nom de la colonne comme retourné dans le jeu de résultats

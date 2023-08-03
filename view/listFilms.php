@@ -51,7 +51,6 @@
 </table>
 <?php
 
-$film = $requete->fetchAll();
 $titre = "Liste des films";
 $titre_secondaire = "Liste des films";
 
