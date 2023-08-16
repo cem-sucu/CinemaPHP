@@ -23,9 +23,9 @@
             <th>DUREE</th>
             <th>REALISATEUR</th>
             <th>AFFICHAGE</th>
-            <th>AJOUTER UN FILM<br>
+            <th class="ajoutFilm">AJOUTER UN FILM<br>
                 <a href="index.php?action=ajouterFilm">
-                <i class="fa-regular fa-square-plus"></i>
+                <i class="fa-regular fa-square-plus" style="color: white;"></i>
                 </a>
             </th>
             <!-- <th>CASTING</th> -->
