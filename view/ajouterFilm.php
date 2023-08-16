@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/css/ajouterFilm.css">
     <title>Document</title>
 </head>
 <body>
     
+<button class="retour"><a href="index.php?action=listFilms">Retour</button>
+
 <form action="?action=ajouterFilm" method="post">
         <label for="titre">Titre :</label>
         <input type="text" name="titre" required>
