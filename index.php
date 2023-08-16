@@ -51,7 +51,7 @@ if(isset($_GET["action"])){
 
 // afficher le contenu
 
-$contenu = ob_get_clean(); // Récupérer le contenu mis en tampon
-require "./view/template.php";
+// $contenu = ob_get_clean(); // Récupérer le contenu mis en tampon
+// require "./view/template.php";
 
 

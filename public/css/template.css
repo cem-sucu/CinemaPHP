@@ -11,7 +11,9 @@ html{
 body{
     background-color: #026045;
     max-width: 100vh;
+    /* background-image: url("../img/johnWick.jpg"); */
 }
+
 
 h1{
     text-align: center;

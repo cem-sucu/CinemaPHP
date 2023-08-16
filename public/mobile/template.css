@@ -1,0 +1,19 @@
+@media (max-width: 768px) {
+
+
+    body {
+        max-width: 100%;
+    }
+
+    .ulTemplate {
+        flex-direction: row;
+        margin: 10px 0;
+    }
+
+    li a{
+        font-size: 1rem;
+    }
+    .ulTemplate li {
+        margin: 5px 0;
+    }
+}
