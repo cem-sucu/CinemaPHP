@@ -12,6 +12,8 @@
 
     li a{
         font-size: 1rem;
+        padding: 6px;
+        margin: 10px;
     }
     .ulTemplate li {
         margin: 5px 0;

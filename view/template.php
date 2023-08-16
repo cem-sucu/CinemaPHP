@@ -14,10 +14,10 @@
     <h1>Mon Cinéma</h1>
     <nav>
         <ul class="ulTemplate">
-            <li><a href="index.php?action=listFilms">Liste des films</a></li>
-            <li><a href="index.php?action=listActeurs">Liste des acteurs</a></li>
-            <li><a href="index.php?action=listRealisateurs">Liste des réalisateurs</a></li>
-            <li><a href="index.php?action=listGenres">Liste des genres</a></li>
+            <li><a href="index.php?action=listFilms">Films</a></li>
+            <li><a href="index.php?action=listActeurs">Acteurs</a></li>
+            <li><a href="index.php?action=listRealisateurs">Réalisateurs</a></li>
+            <li><a href="index.php?action=listGenres">Genres</a></li>
             <!-- <li><a href="index.php?action=ajouterFilm">Ajouter un film</a></li> -->
         </ul>
     </nav>
