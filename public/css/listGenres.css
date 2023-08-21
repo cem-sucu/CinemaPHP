@@ -14,10 +14,13 @@ ul, li{
     color: #fff;
     text-decoration: none;
     list-style: none;
+    
 }
 
-ul, li:hover{
-    color: #fda34b;
-    cursor: pointer;
+.listgenre{
+    display: flex;
+    justify-content: space-around;
+
 }
+
 

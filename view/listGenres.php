@@ -24,16 +24,16 @@
 
 <?php if (isset($films)) { ?>
     <h2>Films du genre sélectionné :</h2>
-    <ul>
+    <ul class="listgenre">
         <?php foreach($films as $film) { ?>
             <li>
                 <h3><?= $film['titre'] ?></h3>
-                <p>Année de sortie : <?= $film['anneSortie'] ?></p>
+                <!-- <p>Année de sortie : <?= $film['anneSortie'] ?></p>
                 <p>Durée : <?= $film['duree'] ?> minutes</p>
                 <p>Résumé : <?= $film['resume'] ?></p>
                 <p>Réalisateur : <?= $film['realisateur'] ?></p>
                 <p>Acteurs : <?= $film['acteurs'] ?></p>
-                <p>Note : <?= $film['note'] ?></p>
+                <p>Note : <?= $film['note'] ?></p> -->
                 <img src="./public/img/<?= $film['affiche'] ?>" alt="<?= $film['titre'] ?>" width="100">
             </li>
         <?php } ?>
