@@ -1,8 +1,15 @@
 h2{
     color: #fff;
 }
+h3{
+    font-size: 1rem;
+}
 p{
     color: #fff;
+}
+.listgenre img{
+    width: 200px;
+    height: auto;
 }
 
 .infos{

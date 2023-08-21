@@ -4,4 +4,7 @@
         grid-template-columns: repeat(2, 1fr);
 
     }
+    .listgenre img{
+        width: 150px;
+    }
 }
