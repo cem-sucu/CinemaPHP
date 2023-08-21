@@ -91,7 +91,6 @@ class ActionController {
 
     public function supprimerFilm($id)
     {   
-        $_GET["id"];
         $bdd = Connect::seConnecter(); // Obtenir une instance de PDO
 
         // Vérifier si la connexion à la base de données a réussi
@@ -105,15 +104,14 @@ class ActionController {
         $requete->bindParam(':id', $id);
 
         if ($requete->execute()) {
-            ob_start();
             echo "Le film a été supprimé avec succès!";
-            ob_end_flush();
-            header("Refresh: 1; url=index.php?action=listFilms"); // Rediriger après 1 secondes vers la liste des films
+            header("Refresh: 1; url=index.php?action=listFilms"); // Rediriger après 1 seconde vers la liste des films
             exit; // Quitter le script
         } else {
             echo "Erreur lors de la suppression du film.";
         }
     }
+
 }
 
 
