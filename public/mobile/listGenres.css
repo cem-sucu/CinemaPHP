@@ -1,0 +1,7 @@
+@media screen and (max-width: 768px) {
+    .listgenre{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+}

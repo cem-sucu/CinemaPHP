@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/listGenres.css">
+    <link rel="stylesheet" href="./public/mobile/listGenres.css">
     <title><?= $titre ?></title>
 </head>
 <body>
@@ -23,7 +24,7 @@
 </form>
 
 <?php if (isset($films)) { ?>
-    <h2>Films du genre sélectionné :</h2>
+    
     <ul class="listgenre">
         <?php foreach($films as $film) { ?>
             <li>
