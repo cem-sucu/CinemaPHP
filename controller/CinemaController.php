@@ -101,19 +101,45 @@ class CinemaController {
     }
 
     /* liste des genrres */
-    public function listGenres(){
-        ob_start();
-        $pdo = Connect::seConnecter();
-        $requete = $pdo->query("SELECT DISTINCT genre 
-                                FROM genre
-                            ");
+    public function listGenres()
+{
+    $bdd = Connect::seConnecter();
 
-        $genres = $requete->fetchAll();
-        $titre = "Liste des genres";
-        $titre_secondaire = "Liste des genres";
+    if (!$bdd) {
+        echo "Erreur de connexion à la base de données.";
+        exit;
+    }
 
-        // Inclure la vue listGenres.php et passer les données nécessaires
-        require "view/listGenres.php";
+    // Requête SQL pour obtenir la liste des genres
+    $requeteGenres = $bdd->query('SELECT * FROM genre');
+    $genres = $requeteGenres->fetchAll();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['genreId'])) {
+        $genreId = $_POST['genreId'];
+
+        // Requête SQL pour obtenir les films d'un genre spécifique
+        $requeteFilms = $bdd->prepare('SELECT 
+        f.id_film, f.titre, f.anneSortie, f.duree, f.resume, f.affiche, f.note,
+        CONCAT(r.prenom, " ", r.nom) 
+        AS realisateur,
+        GROUP_CONCAT(DISTINCT CONCAT(a.prenom, " ", a.nom) SEPARATOR ", ") AS acteurs
+        FROM film f
+        JOIN posseder p ON f.id_film = p.id_film
+        JOIN genre g ON p.id_genre = g.id_genre
+        JOIN realisateur r1 ON f.id_realisateur = r1.id_realisateur
+        JOIN personne r ON r1.id_personne = r.id_personne
+        JOIN avoir av ON f.id_film = av.id_film
+        JOIN acteur ac ON av.id_acteur = ac.id_acteur
+        JOIN personne a ON ac.id_personne = a.id_personne
+        WHERE g.id_genre = :genreId
+        GROUP BY f.id_film');
+        $requeteFilms->bindParam(':genreId', $genreId);
+        $requeteFilms->execute();
+        $films = $requeteFilms->fetchAll();
+    }
+
+    require "view/listGenres.php"; 
+
 
         // Pas besoin d'utiliser ob_get_clean() ici, car nous ne faisons pas d'inclusion de vue directement dans cette méthode
         // Nous retournerons simplement les valeurs $genres, $titre et $titre_secondaire dans un tableau associatif
