@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./public/css/ajouterFilm.css">
+    <link rel="stylesheet" href="./public/mobile/ajouterFilm.css">
     <title>Document</title>
 </head>
 <body>
     
 <!-- <button class="retour"><a href="index.php?action=listFilms">Retour</button> -->
 
-<form action="?action=ajouterFilm" method="post">
+<form action="?action=ajouterFilm" method="post" enctype="multipart/form-data">
     <label for="titre">Titre :</label>
     <input type="text" name="titre" required>
     <br>
@@ -23,8 +24,8 @@
     <label for="resume">Résumé :</label>
     <input type="text" name="resume" required>
     <br>
-    <label for="affiche">Affiche (URL) :</label>
-    <input type="text" name="affiche" required>
+    <label for="affiche">Affiche :</label>
+    <input type="file" name="affiche" required>
     <br>
     <label for="note">Note :</label>
     <input type="number" name="note" required>

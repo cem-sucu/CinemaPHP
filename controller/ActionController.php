@@ -13,7 +13,6 @@ class ActionController {
             $anneeSortie = $_POST['anneeSortie'];
             $duree = $_POST['duree'];
             $resume = $_POST['resume'];
-            $affiche = $_POST['affiche'];
             $note = $_POST['note'];
             $realisateurId = $_POST['realisateurId'];
             $genreId = $_POST['genreId'];
@@ -30,13 +29,29 @@ class ActionController {
             try {
                 $bdd->beginTransaction(); // Début de la transaction
     
+            // Gérer le téléchargement de l'affiche
+            if (isset($_FILES['affiche']) && $_FILES['affiche']['error'] === 0) {
+                $affiche_tmp = $_FILES['affiche']['tmp_name'];
+                $affiche_nom = $_FILES['affiche']['name'];
+                $affiche_destination = './public/img/'  . $affiche_nom;
+
+                // Déplacer le fichier
+                if (move_uploaded_file($affiche_tmp, $affiche_destination)) {
+                    echo "Le fichier a été téléchargé avec succès et déplacé vers le dossier de destination.";
+                } else {
+                    echo "Erreur lors du téléchargement de l'affiche.";
+                }
+                } else {
+                    echo "Erreur : aucun fichier d'affiche téléchargé.";
+                }
+            
                 // Requête INSERT INTO pour ajout film
                 $requeteFilm = $bdd->prepare('INSERT INTO film (titre, anneSortie, duree, resume, affiche, note, id_realisateur) VALUES (:titre, :anneeSortie, :duree, :resume, :affiche, :note, :realisateurId)');
                 $requeteFilm->bindParam(':titre', $titre);
                 $requeteFilm->bindParam(':anneeSortie', $anneeSortie);
                 $requeteFilm->bindParam(':duree', $duree);
                 $requeteFilm->bindValue(':resume', $resume);
-                $requeteFilm->bindParam(':affiche', $affiche);
+                $requeteFilm->bindParam(':affiche', $affiche_nom);
                 $requeteFilm->bindValue(':note', $note);
                 $requeteFilm->bindParam(':realisateurId', $realisateurId);
                 $requeteFilm->execute();
