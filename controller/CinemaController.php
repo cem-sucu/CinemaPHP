@@ -31,14 +31,26 @@ class CinemaController {
     public function detailsFilms($id){
     ob_start(); // Début de la mise en tampon du contenu
 
-    $_GET["id"];
+    $id = (isset($_SESSION['lastInsertedFilmId'])) ? $_SESSION['lastInsertedFilmId'] : $_GET["id"];
+
     $pdo = Connect::seConnecter();
-    $requete = $pdo->prepare(" SELECT 
-    f.titre, f.anneSortie, f.duree, f.affiche, p.nom AS realisateur
+    $requete = $pdo->prepare(" SELECT
+    f.titre, f.anneSortie,
+    CONCAT(p.prenom, ' ', p.nom) AS realisateur,
+    GROUP_CONCAT(DISTINCT CONCAT(a.prenom, ' ', a.nom) SEPARATOR ', ') AS acteurs,
+    GROUP_CONCAT(DISTINCT r.role SEPARATOR ', ') AS roles,
+    f.duree, f.resume, f.affiche, f.note
     FROM film f
-    INNER JOIN realisateur r ON f.id_realisateur = r.id_realisateur
-    INNER JOIN personne p ON r.id_personne = p.id_personne
+    JOIN realisateur r1 ON f.id_realisateur = r1.id_realisateur
+    JOIN personne p ON r1.id_personne = p.id_personne
+    JOIN avoir av ON f.id_film = av.id_film
+    JOIN acteur ac ON av.id_acteur = ac.id_acteur
+    JOIN personne a ON ac.id_personne = a.id_personne
+    JOIN avoir avr ON f.id_film = avr.id_film
+    JOIN role r ON avr.id_role = r.id_role
     WHERE f.id_film = :id
+    GROUP BY f.id_film;
+
     ");
 
     $requete->bindParam(':id', $id);
@@ -48,6 +60,7 @@ class CinemaController {
     $titre = "Détails du film : " . $details['titre'];
     $titre_secondaire = "Détails du film";
 
+    unset($_SESSION['lastInsertedFilmId']);
     // inclue la vue detailsFilms.php
     require "view/detailsFilms.php";
     }
@@ -110,7 +123,6 @@ class CinemaController {
     public function genreFilms($id){
     ob_start();
 
-    $_GET['id'];
     $pdo = Connect::seConnecter();
     $requete = $pdo->prepare("SELECT f.titre, f.anneSortie, f.duree, f.affiche, p.nom AS realisateur
     FROM film f

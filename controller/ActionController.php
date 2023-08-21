@@ -8,6 +8,7 @@ class ActionController {
     public function ajouterFilm()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Récupération des données du formulaire
             $titre = $_POST['titre'];
             $anneeSortie = $_POST['anneeSortie'];
             $duree = $_POST['duree'];
@@ -15,42 +16,63 @@ class ActionController {
             $affiche = $_POST['affiche'];
             $note = $_POST['note'];
             $realisateurId = $_POST['realisateurId'];
-
-            $bdd = Connect::seConnecter(); // Obtenir une instance de PDO
-
-            // si pas bdd afficher une erreur .
+            $genreId = $_POST['genreId'];
+            $acteurIds = $_POST['acteurIds'];
+            $roleId = $_POST['roleId'];
+    
+            $bdd = Connect::seConnecter();
+    
             if (!$bdd) {
                 echo "Erreur de connexion à la base de données.";
                 exit;
             }
-
-            // Requête INSERT INTO
-            $requete = $bdd->prepare('INSERT INTO film (titre, anneSortie, duree, resume, affiche, note, id_realisateur) VALUES (:titre, :anneeSortie, :duree, :resume, :affiche, :note, :realisateurId)');
-            $requete->bindParam(':titre', $titre);
-            $requete->bindParam(':anneeSortie', $anneeSortie);
-            $requete->bindParam(':duree', $duree);
-            $requete->bindValue(':resume', $resume);
-            $requete->bindParam(':affiche', $affiche);
-            $requete->bindValue(':note', $note);
-            $requete->bindParam(':realisateurId', $realisateurId);
-
-            if ($requete->execute()) {
-                $lastInsertedId = $bdd->lastInsertId();
-                ob_start();
-                echo "Le film a été ajouté avec succès!";
-                ob_end_flush();
-                header("Refresh: 1; url=index.php?action=detailsFilms&id=".$lastInsertedId); //une fois le message succés affiché nous redirige dans 1 secondes a listFilm
-                exit; // on quitte le script
-            } else {
-                echo "Erreur lors de l'ajout du film.";
+    
+            try {
+                $bdd->beginTransaction(); // Début de la transaction
+    
+                // Requête INSERT INTO pour ajout film
+                $requeteFilm = $bdd->prepare('INSERT INTO film (titre, anneSortie, duree, resume, affiche, note, id_realisateur) VALUES (:titre, :anneeSortie, :duree, :resume, :affiche, :note, :realisateurId)');
+                $requeteFilm->bindParam(':titre', $titre);
+                $requeteFilm->bindParam(':anneeSortie', $anneeSortie);
+                $requeteFilm->bindParam(':duree', $duree);
+                $requeteFilm->bindValue(':resume', $resume);
+                $requeteFilm->bindParam(':affiche', $affiche);
+                $requeteFilm->bindValue(':note', $note);
+                $requeteFilm->bindParam(':realisateurId', $realisateurId);
+                $requeteFilm->execute();
+    
+                $filmId = $bdd->lastInsertId(); // Récupération de l'ID du film inséré
+    
+                // Requête INSERT INTO pour ajout genre du film (table posseder de bdd)
+                $requeteGenre = $bdd->prepare('INSERT INTO posseder (id_film, id_genre) VALUES (:filmId, :genreId)');
+                $requeteGenre->bindParam(':filmId', $filmId);
+                $requeteGenre->bindParam(':genreId', $genreId);
+                $requeteGenre->execute();
+    
+                // Requête INSERT INTO pour ajouter les acteurs du film (table avoir de la bdd)
+                foreach ($acteurIds as $acteurId) {
+                    $requeteActeur = $bdd->prepare('INSERT INTO avoir (id_film, id_acteur, id_role) VALUES (:filmId, :acteurId, :roleId)');
+                    $requeteActeur->bindParam(':filmId', $filmId);
+                    $requeteActeur->bindParam(':acteurId', $acteurId);
+                    $requeteActeur->bindParam(':roleId', $roleId);
+                    $requeteActeur->execute();
+                }
+    
+                $bdd->commit(); // et ensuite validation de la transaction
+                echo "Le film a été ajouté avec succès ! ";
+                header("Refresh: 1; url=index.php?action=detailsFilms&id=".$filmId);
+                exit;
+            } catch (\Exception $e) {
+                $bdd->rollBack(); // En cas d'erreur, pouer annuler la transaction
+                echo "Erreur lors de l'ajout du film : " . $e->getMessage();
             }
         } else {
             ob_start();
             require "view/ajouterFilm.php";
             // $contenu = ob_get_clean();
-
         }
     }
+    
 
     public function supprimerFilm($id)
     {   

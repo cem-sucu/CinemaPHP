@@ -22,6 +22,8 @@
         <p>Année de sortie : <?= $details["anneSortie"] ?></p>
         <p>Durée : <?= $details["duree"] ?> min</p>
         <p>Réalisateur : <?= $details["realisateur"] ?></p>
+        <p>Acteur : <?= $details["acteurs"] ?></p>
+        <p class="resumee"><?= $details["resume"] ?></p>
     </div>
 </div>
 

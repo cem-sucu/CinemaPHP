@@ -1,7 +1,7 @@
 <?php
 
 // echo "TEST"; // pour voir si tout marche si page blanche apparait
-
+session_start();
 // permet d'affichee tout les erreur 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
