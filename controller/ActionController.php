@@ -47,29 +47,29 @@ class ActionController {
             
                 // Requête INSERT INTO pour ajout film
                 $requeteFilm = $bdd->prepare('INSERT INTO film (titre, anneSortie, duree, resume, affiche, note, id_realisateur) VALUES (:titre, :anneeSortie, :duree, :resume, :affiche, :note, :realisateurId)');
-                $requeteFilm->bindParam(':titre', $titre);
-                $requeteFilm->bindParam(':anneeSortie', $anneeSortie);
-                $requeteFilm->bindParam(':duree', $duree);
+                $requeteFilm->bindValue(':titre', $titre);
+                $requeteFilm->bindValue(':anneeSortie', $anneeSortie);
+                $requeteFilm->bindValue(':duree', $duree);
                 $requeteFilm->bindValue(':resume', $resume);
-                $requeteFilm->bindParam(':affiche', $affiche_nom);
+                $requeteFilm->bindValue(':affiche', $affiche_nom);
                 $requeteFilm->bindValue(':note', $note);
-                $requeteFilm->bindParam(':realisateurId', $realisateurId);
+                $requeteFilm->bindValue(':realisateurId', $realisateurId);
                 $requeteFilm->execute();
     
                 $filmId = $bdd->lastInsertId(); // Récupération de l'ID du film inséré
     
                 // Requête INSERT INTO pour ajout genre du film (table posseder de bdd)
                 $requeteGenre = $bdd->prepare('INSERT INTO posseder (id_film, id_genre) VALUES (:filmId, :genreId)');
-                $requeteGenre->bindParam(':filmId', $filmId);
-                $requeteGenre->bindParam(':genreId', $genreId);
+                $requeteGenre->bindValue(':filmId', $filmId);
+                $requeteGenre->bindValue(':genreId', $genreId);
                 $requeteGenre->execute();
     
                 // Requête INSERT INTO pour ajouter les acteurs du film (table avoir de la bdd)
                 foreach ($acteurIds as $acteurId) {
                     $requeteActeur = $bdd->prepare('INSERT INTO avoir (id_film, id_acteur, id_role) VALUES (:filmId, :acteurId, :roleId)');
-                    $requeteActeur->bindParam(':filmId', $filmId);
-                    $requeteActeur->bindParam(':acteurId', $acteurId);
-                    $requeteActeur->bindParam(':roleId', $roleId);
+                    $requeteActeur->bindValue(':filmId', $filmId);
+                    $requeteActeur->bindValue(':acteurId', $acteurId);
+                    $requeteActeur->bindValue(':roleId', $roleId);
                     $requeteActeur->execute();
                 }
     
@@ -99,18 +99,38 @@ class ActionController {
             exit;
         }
 
-        // Requête DELETE FROM
-        $requete = $bdd->prepare('DELETE FROM film WHERE id_film = :id');
-        $requete->bindParam(':id', $id);
+        try {
+            $bdd->beginTransaction(); // Début de la transaction
 
-        if ($requete->execute()) {
+            // Supprimer les enregistrements liés dans la table "avoir" d'abord
+            $requeteSupprimerAvoir = $bdd->prepare('DELETE FROM avoir WHERE id_film = :id');
+            $requeteSupprimerAvoir->bindParam(':id', $id);
+            $requeteSupprimerAvoir->execute();
+
+            // Supprimer les enregistrements liés dans la table "posseder" d'abord
+            $requeteSupprimerPosseder = $bdd->prepare('DELETE FROM posseder WHERE id_film = :id');
+            $requeteSupprimerPosseder->bindParam(':id', $id);
+            $requeteSupprimerPosseder->execute();
+
+            // Supprimer le film de la table "film"
+            $requeteSupprimerFilm = $bdd->prepare('DELETE FROM film WHERE id_film = :id');
+            $requeteSupprimerFilm->bindParam(':id', $id);
+            $requeteSupprimerFilm->execute();
+
+            $bdd->commit(); // Validation de la transaction
             echo "Le film a été supprimé avec succès!";
             header("Refresh: 1; url=index.php?action=listFilms"); // Rediriger après 1 seconde vers la liste des films
             exit; // Quitter le script
-        } else {
-            echo "Erreur lors de la suppression du film.";
+        } catch (\Exception $e) {
+            $bdd->rollBack(); // En cas d'erreur, pour annuler la transaction
+            echo "Erreur lors de la suppression du film : " . $e->getMessage();
         }
     }
+
+
+
+
+
 
 }
 
